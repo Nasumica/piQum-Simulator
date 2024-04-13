@@ -21,34 +21,41 @@ type StatCalc struct {
 // Reset statistical calculator.
 func (s *StatCalc) Reset() {
 	s.Cnt, s.Sum, s.Sqr, s.Min, s.Max = 0, 0, 0, 0, 0
-	s.Avg, s.Dev, s.Nul, s.Val, s.Cat = 0, 0, 0, 0, ""
+	s.Avg, s.Dev, s.Nul, s.Val = 0, 0, 0, 0
 }
 
 // Add values to statistical calculator.
-func (s *StatCalc) Add(values ...float64) {
+func (sc *StatCalc) Add(values ...float64) {
 	for _, x := range values {
-		if s.Cnt == 0 {
-			s.Min = x
-			s.Max = x
-		} else if s.Min > x {
-			s.Min = x
-		} else if s.Max < x {
-			s.Max = x
+		if sc.Cnt == 0 {
+			sc.Min = x
+			sc.Max = x
+		} else if sc.Min > x {
+			sc.Min = x
+		} else if sc.Max < x {
+			sc.Max = x
 		}
-		s.Cnt++
+		sc.Cnt++
 		if x == 0 {
-			s.Nul++
+			sc.Nul++
 		} else {
-			s.Sum += x
-			s.Sqr += x * x
+			sc.Sum += x
+			sc.Sqr += x * x
 		}
-		if s.Min == s.Max {
-			s.Avg = s.Min
+		if sc.Min == sc.Max {
+			sc.Avg = sc.Min
 		} else {
-			n := float64(s.Cnt)
-			s.Avg = s.Sum / n
-			s.Dev = math.Sqrt(math.Abs(n*s.Sqr-s.Sum*s.Sum)) / n
+			n := float64(sc.Cnt)
+			sc.Avg = sc.Sum / n
+			sc.Dev = math.Sqrt(math.Abs(n*sc.Sqr-sc.Sum*sc.Sum)) / n
 		}
-		s.Val = x
+		sc.Val = x
+	}
+}
+
+// Add integers to statistical calculator.
+func (sc *StatCalc) Int(values ...int) {
+	for _, i := range values {
+		sc.Add(float64(i))
 	}
 }
