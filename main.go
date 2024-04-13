@@ -365,6 +365,10 @@ func test(game string, iter int) {
 
 	RND.Randomize(uint64(Data.Seed))
 
+	if iter < 0 {
+		iter = -iter - Data.Lev[0].Cnt
+	}
+
 	start := time.Now()
 	this.bet, this.games, this.deals, this.base = 0, 0, 0, 0
 	// for this.games < iter {
@@ -447,11 +451,11 @@ func main() {
 	skill = 100                // in percent (-100, 100)
 	fp_weight = 2.5            // 1.5 or 2.5
 	bet = 1                    // ticket bet
-	deals := 0 * million       // games to test
+	deals := -1000 * million   // games to test
 	game := "piqum-classic-95" // game config
 
 	if len(os.Args) > 1 {
-		game, deals = os.Args[1], 0
+		game = os.Args[1]
 		if len(os.Args) > 2 {
 			if n, e := strconv.ParseInt(os.Args[2], 10, 64); e == nil {
 				deals = int(n) * million
