@@ -459,5 +459,5 @@ func main() {
 		}
 	}
 
-	test(game, 1*deals) // do it
+	test(game, deals) // do it
 }
