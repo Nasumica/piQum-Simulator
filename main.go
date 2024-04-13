@@ -447,7 +447,7 @@ func main() {
 	skill = 100                // in percent (-100, 100)
 	fp_weight = 2.5            // 1.5 or 2.5
 	bet = 1                    // ticket bet
-	deals := 10 * million      // games to test
+	deals := 0 * million       // games to test
 	game := "piqum-classic-95" // game config
 
 	if len(os.Args) > 1 {
@@ -459,5 +459,5 @@ func main() {
 		}
 	}
 
-	test(game, deals) // do it
+	test(game, 1*deals) // do it
 }

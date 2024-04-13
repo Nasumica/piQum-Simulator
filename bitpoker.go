@@ -10,7 +10,7 @@ import (
 
 type spil = uint64
 
-const standard_pack spil = 1<<52 - 1 // 52 ones
+const standard_pack spil = (1 << 52) - 1 // 52 ones
 
 /*
 	AAAA KKKK QQQQ JJJJ TTTT 9999 8888 7777 6666 5555 4444 3333 2222
