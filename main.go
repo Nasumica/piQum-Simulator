@@ -381,7 +381,9 @@ func test(game string, iter int) {
 	elapsed := time.Since(start).Seconds()
 	Data.Seed = int(RND.Seed())
 
-	SaveResult(game)
+	if iter > 0 {
+		SaveResult(game)
+	}
 
 	rtp := 100 * Data.Cat["total"].Sum / Data.Bet
 	fmt.Printf("%s  (%.2f%%)\n", game, rtp)
